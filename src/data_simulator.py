@@ -6,6 +6,9 @@ import time
 
 
 class Simulator:
+    def __init__(self, patient_list):
+        self.patient_list = patient_list
+       
     def calculate_rank(self, patient, curr_record):
         # NEWS Dictionaries
         resp_dict = {
@@ -118,11 +121,11 @@ class Simulator:
     def simulate(self):
         while True:
             # We need patients and thier records here
-            patient_list = users.PatientList()
-            for patient in patient_list.patients:
+            
+            for patient in self.patient_list.patients:
                 if patient.records:
-                    curr_patient_record = patient.records[-1]
-                    if len(patient.records) > 1:
+                    curr_patient_record = patient.current_record
+                    if curr_patient_record:
                         # Generate new record
                         new_record = self.generate_new_record(
                             patient, curr_patient_record
@@ -130,12 +133,15 @@ class Simulator:
                         # Calculate rank
                         patient.rank = self.calculate_rank(patient, new_record)
                         # Add Record
-                        patient_list.add_record(new_record)
+                        self.patient_list.add_record(new_record)
                         # Update Patient
-                        patient_list.update_patient(patient)
+                        self.patient_list.update_patient(patient)
                     else:
                         # Calculate rank
                         patient.rank = self.calculate_rank(patient, new_record)
+                        # Add Record
+                        self.patient_list.add_record(new_record)
                         # Update Patient
-                        patient_list.update_patient(patient)
+                        self.patient_list.update_patient(patient)
+            
             time.sleep(10)

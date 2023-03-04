@@ -5,7 +5,7 @@ PATIENT_PATH = 'data/patients.csv'
 RECORD_PATH = 'data/records.csv'
 
 class Record:
-    def __init__(self, record_id, patient_id, date_time,hart_rate, blood_pressure, temperature, oxygen_saturation, respiratory_rate, rank):
+    def __init__(self, record_id, patient_id, date_time,hart_rate, blood_pressure, temperature, oxygen_saturation, respiratory_rate, rank=0):
         self.record_id = record_id
         self.patient_id = patient_id
         self.date_time = date_time

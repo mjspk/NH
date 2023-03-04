@@ -6,8 +6,8 @@ import time
 
 
 class Simulator:
-    def __init__(self, patient_list):
-        self.patient_list = patient_list
+    def __init__(self, patients_view):
+        self.patients_view = patients_view
        
     def calculate_rank(self, patient, curr_record):
         # NEWS Dictionaries
@@ -122,7 +122,7 @@ class Simulator:
         while True:
             # We need patients and thier records here
             
-            for patient in self.patient_list.patients:
+            for patient in self.patients_view.patient_list.patients:
                 if patient.records:
                     curr_patient_record = patient.current_record
                     if curr_patient_record:
@@ -133,15 +133,26 @@ class Simulator:
                         # Calculate rank
                         patient.rank = self.calculate_rank(patient, new_record)
                         # Add Record
-                        self.patient_list.add_record(new_record)
+                        self.patients_view.patient_list.add_record(new_record)
                         # Update Patient
-                        self.patient_list.update_patient(patient)
+                        self.patients_view.patient_list.update_patient(patient)
                     else:
                         # Calculate rank
-                        patient.rank = self.calculate_rank(patient, new_record)
+                        initial_record =users.Record(
+                            str(uuid.uuid4()),
+                            patient.patient_id,
+                            datetime.now(),
+                            0,
+                            0,
+                            0,
+                            0,
+                            0,
+                        )
+                        patient.rank = self.calculate_rank(patient, initial_record)
                         # Add Record
-                        self.patient_list.add_record(new_record)
+                        self.patients_view.patient_list.add_record(initial_record)
                         # Update Patient
-                        self.patient_list.update_patient(patient)
+                        self.patients_view.patient_list.update_patient(patient)
+                        self.patients_view.refresh()
             
             time.sleep(10)

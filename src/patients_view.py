@@ -27,6 +27,7 @@ from flet import (
 
 from add_patient_view import AddPatientView
 from patients_list_view import PatientsListView
+from data_simulator import Simulator
 from users import Patient, PatientList
 
 class PatientsView(UserControl):
@@ -35,6 +36,7 @@ class PatientsView(UserControl):
         self.app = app
         self.patients_list = PatientList()
         self.patients_list_view = PatientsListView(self)
+        self.data_simulator=Simulator(self)
         self.build()
     
     def build(self):
@@ -99,9 +101,12 @@ class PatientsView(UserControl):
         complaint = self.page.dialog.content.controls[4].value
         Ctas = self.page.dialog.content.controls[5].value
         current_time = datetime.datetime.now()
-
         p=Patient(str(uuid.uuid4()),name,age,address,location,current_time,complaint,Ctas)
         self.patients_list.add_patient(p)
+        self.patients_list_view.refresh()
+
+
+    def refresh(self):
         self.patients_list_view.refresh()
 
 

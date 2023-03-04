@@ -36,8 +36,8 @@ from patient_details_view import PatientDetailsView
 #         self.Ctas=Ctas
 #         self.rank = rank
 
-class PatientsListView(UserControl):
-    def __init__(self, app, *args, **kwargs):
+class PatientsList(UserControl):
+    def __init__(self, app, patients_list, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.app = app
         self.patitents_list = app.patients_list.get_patients()

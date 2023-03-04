@@ -46,6 +46,7 @@ class PatientsListView(UserControl):
             self.lv.controls.append(
                 Container(
                     Row([
+                Text(value=patient.patient_id, style="headlineMedium", visible=False),
                 Row([Icon(name=icons.PERSON, size=30, color=colors.WHITE), Text(value=patient.name, style="headlineMedium")]),
                 Row([Icon(name=icons.TIMER, size=30, color=colors.WHITE), Text(value=patient.age, style="headlineMedium")]),
                 Row([Icon(name=icons.SIGNPOST, size=30, color=colors.WHITE), Text(value=patient.address, style="headlineMedium")]),
@@ -69,7 +70,7 @@ class PatientsListView(UserControl):
         self.update()
 
     def patient_selected(self, control):
-        PatientDetailsView(self.app, patient=control.patient)
+        pass
 
 
 

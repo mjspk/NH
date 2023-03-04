@@ -19,8 +19,6 @@ class Record:
       
 
 
-
-
 class Patient:
     def __init__(self,patient_id,name,age,address,location,arrival_time,complaint,ctas,rank=0,current_record=None):
         self.patient_id = patient_id

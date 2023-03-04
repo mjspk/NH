@@ -19,6 +19,8 @@ from flet import (
 
 )
 
+from users import PatientList
+
 
 class PatientsList(UserControl):
     def __init__(self, app, patients_list, *args, **kwargs):

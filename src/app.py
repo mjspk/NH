@@ -52,14 +52,14 @@ class App(UserControl):
     
     
     def build(self):
-        self.layout = AppLayout(
-            self,
-            self.page,
-            tight=True,
-            expand=True,
-            vertical_alignment="start",
-        )
-        #self.layout = PatientDetailsView(self)
+        # self.layout = AppLayout(
+        #     self,
+        #     self.page,
+        #     tight=True,
+        #     expand=True,
+        #     vertical_alignment="start",
+        # )
+        self.layout = PatientDetailsView(self)
         return self.layout
     
     def initialize(self):

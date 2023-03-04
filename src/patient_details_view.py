@@ -26,7 +26,8 @@ from flet import (
 )
 
 
-
+from users import Patient
+from users import Record
 
 import matplotlib
 import matplotlib.pyplot as plt
@@ -57,9 +58,10 @@ class PatientDetailsView(UserControl):
 
     #         MatplotlibChart(fig, expand=True)
     
-    def __init__(self, app, *args, **kwargs):
+    def __init__(self, app,patient, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.app = app
+        self.patient=patient
         self.build()
 
     def build(self):
@@ -87,9 +89,9 @@ class PatientDetailsView(UserControl):
                             ft.DataRow(
                                 color = "red",
                                 cells=[
-                                    ft.DataCell(ft.Text("John Doe")),
-                                    ft.DataCell(ft.Text("3")),
-                                    ft.DataCell(ft.Text("11")),
+                                    ft.DataCell(ft.Text(self.patient.name)),
+                                    ft.DataCell(ft.Text(self.patient.ctas)),
+                                    ft.DataCell(ft.Text((self.patient.rank / 3 * 20) + self.patient.ctas -6)),
                                     ft.DataCell(ft.Text("1")),
                                 ],
                             ),
@@ -98,16 +100,16 @@ class PatientDetailsView(UserControl):
                         Row(
                             controls = [
                                 Text(value= "Arrival: ", weight="bold"),
-                                Text(value= "TIME1"),
+                                Text(value= self.patient.arrival_time),
                                 Text(value= "Location: ", weight="bold"),
-                                Text(value= "Loc")
+                                Text(value= self.patient.location)
                             ]
                         ),
             
                     Row(
                         controls = [
                             Text(value = "CEDIS Complaint: ", weight="bold"),
-                            Text(value = "broken leg")
+                            Text(value = self.patient.complaint)
                         ]
                     ),
                     ],
@@ -193,7 +195,6 @@ class PatientDetailsView(UserControl):
                 ],
             ),
             
-        
             # chart = ChartView(self),
         
             
@@ -209,7 +210,24 @@ class PatientDetailsView(UserControl):
         )
 
         # chart = ChartView(self)
+        
+        # fig, ax = plt.subplots()
 
+        # fruits = ["apple", "blueberry", "cherry", "orange"]
+        # counts = [40, 100, 30, 55]
+        # bar_labels = ["red", "blue", "_red", "orange"]
+        # bar_colors = ["tab:red", "tab:blue", "tab:red", "tab:orange"]
+
+        # ax.bar(fruits, counts, label=bar_labels, color=bar_colors)
+
+        # ax.set_ylabel("fruit supply")
+        # ax.set_title("Fruit supply by kind and color")
+        # ax.legend(title="Fruit color")
+
+        
+        
+        # self.layout.page.add(MatplotlibChart(fig, expand=True))
+        
         return self.layout
     
 

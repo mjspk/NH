@@ -74,11 +74,11 @@ class PatientsListView(UserControl):
 
 
     def get_color_based_on_rank(self, rank):
-        if rank == 1:
+        if rank == 3:
             return colors.RED_400
         elif rank == 2:
             return colors.YELLOW_400
-        elif rank == 3:
+        elif rank == 1:
             return colors.GREEN_400
         else:
             return colors.BROWN_400

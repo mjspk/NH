@@ -19,12 +19,14 @@ from flet import (
 
 )
 
+from src.users import PatientList
 
-class PatientsList(UserControl):
-    def __init__(self, app,patitents_list, *args, **kwargs):
+
+class PatientsListView(UserControl):
+    def __init__(self, app, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.app = app
-        self.patitents_list = patitents_list
+        self.patitents_list = PatientList().get_patients()
         self.build()
     
     def build(self):

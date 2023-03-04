@@ -22,14 +22,13 @@ class Record:
 
 
 class Patient:
-    def __init__(self,name,age,address,phone_number,patient_id):
+    def __init__(self,name,age,address,patient_id):
         self.name = name
         self.age = age
         self.address = address
-        self.phone_number = phone_number
         self.patient_id = patient_id
         self.records = []
-        
+
 
 
 
@@ -38,6 +37,10 @@ class PatientList:
         self.patients = []
         self.records = []
         self.load_data()
+
+    def get_patients(self):
+        return self.patients
+
 
     def load_data(self):
         with open(PATIENT_PATH, 'r') as file:

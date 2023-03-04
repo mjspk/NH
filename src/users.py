@@ -89,7 +89,4 @@ class PatientList:
             for patient in self.patients:
                 writer.writerow([patient.name, patient.age, patient.address, patient.phone_number, patient.patient_id])
 
-    def update_record(self, record):
-        for i in range(len(self.records)):
-            if self.records[i].record_id == record.record_id:
-                self
+    

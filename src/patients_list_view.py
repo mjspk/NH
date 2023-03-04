@@ -19,7 +19,7 @@ from flet import (
 
 )
 
-from src.users import PatientList
+from users import PatientList
 
 
 class PatientsListView(UserControl):

@@ -26,6 +26,7 @@ from flet import (
 from add_patient_view import AddPatientView
 
 from app_layout import AppLayout
+from patient_details_view import PatientDetailsView
  
 class App(UserControl):
     def __init__(self, page: Page):
@@ -58,6 +59,7 @@ class App(UserControl):
             expand=True,
             vertical_alignment="start",
         )
+        #self.layout = PatientDetailsView(self)
         return self.layout
     
     def initialize(self):

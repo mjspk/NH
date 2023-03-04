@@ -24,7 +24,7 @@ from flet import (
 )
 
 from add_patient_view import AddPatientView
-from src.patients_list_view import PatientsListView
+from patients_list_view import PatientsListView
 
 class PatientsView(UserControl):
     def __init__(self, app, *args, **kwargs):
@@ -72,7 +72,7 @@ class PatientsView(UserControl):
                         )
                     ]
                 ),
-                Row(PatientsListView()),
+                Row(PatientsListView(self.app)),
             ],
             expand=True,        
         ),

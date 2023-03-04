@@ -1,4 +1,3 @@
-import math
 import random
 import uuid
 import users
@@ -87,7 +86,7 @@ class Simulator:
         news_score += get_oxy(curr_record.oxygen_saturation)
 
         # Calculate Rank
-        rank =math.ceil(((6-int(patient.ctas) + news_score)/20)*3)
+        rank = int(patient.ctas) + news_score
 
         return rank
 

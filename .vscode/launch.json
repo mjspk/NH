@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "name": "flet_run",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/run.py",
+        }
+    ]
+}

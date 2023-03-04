@@ -1,0 +1,10 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "flet_run",
+            "command": "flet run main.py -d",
+            "type": "shell"
+        }
+    ]
+}

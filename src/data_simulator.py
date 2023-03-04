@@ -121,38 +121,37 @@ class Simulator:
     def simulate(self):
         while True:
             # We need patients and thier records here
-            
-            for patient in self.patients_view.patient_list.patients:
-                if patient.records:
-                    curr_patient_record = patient.current_record
-                    if curr_patient_record:
-                        # Generate new record
-                        new_record = self.generate_new_record(
-                            patient, curr_patient_record
-                        )
-                        # Calculate rank
-                        patient.rank = self.calculate_rank(patient, new_record)
-                        # Add Record
-                        self.patients_view.patient_list.add_record(new_record)
-                        # Update Patient
-                        self.patients_view.patient_list.update_patient(patient)
-                    else:
-                        # Calculate rank
-                        initial_record =users.Record(
-                            str(uuid.uuid4()),
-                            patient.patient_id,
-                            datetime.now(),
-                            0,
-                            0,
-                            0,
-                            0,
-                            0,
-                        )
-                        patient.rank = self.calculate_rank(patient, initial_record)
-                        # Add Record
-                        self.patients_view.patient_list.add_record(initial_record)
-                        # Update Patient
-                        self.patients_view.patient_list.update_patient(patient)
-                        self.patients_view.refresh()
-            
+
+            for patient in self.patient_list.patients:
+                curr_patient_record = patient.current_record
+                if curr_patient_record:
+                    # Generate new record
+                    new_record = self.generate_new_record(patient, curr_patient_record)
+                    # Calculate rank
+                    patient.rank = self.calculate_rank(patient, new_record)
+                    new_record.rank = patient.rank
+                    # Add Record
+                    self.patient_list.add_record(new_record)
+                    # Update Patient
+                    self.patient_list.update_patient(patient)
+                else:
+                    # Generate Initial Record
+                    initial_record = users.Record(
+                        str(uuid.uuid4()),
+                        patient.patient_id,
+                        datetime.now(),
+                        random.randint(40, 131),
+                        random.randint(90, 220),
+                        random.randint(35, 40),
+                        random.randint(90, 99),
+                        random.randint(7, 25),
+                    )
+                    # Calculate rank
+                    patient.rank = self.calculate_rank(patient, initial_record)
+                    initial_record.rank = patient.rank
+                    # Add Record
+                    self.patient_list.add_record(initial_record)
+                    # Update Patient
+                    self.patient_list.update_patient(patient)
+
             time.sleep(10)

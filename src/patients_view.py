@@ -1,5 +1,6 @@
 import datetime
 import uuid
+import threading
 from flet import (
     AlertDialog,
     AppBar,
@@ -35,9 +36,10 @@ class PatientsView(UserControl):
         super().__init__(*args, **kwargs)
         self.app = app
         self.patients_list = PatientList()
-        self.patients_list_view = PatientsListView(self)
+        self.patients_list_view = PatientsListView(self) 
         self.data_simulator=Simulator(self)
         self.build()
+        threading.Thread(target=self.data_simulator.simulate).start()
     
     def build(self):
         self.layout =Container(

@@ -86,7 +86,7 @@ class Simulator:
         news_score += get_oxy(curr_record.oxygen_saturation)
 
         # Calculate Rank
-        rank = patient.ctas + news_score
+        rank = int(patient.ctas) + news_score
 
         return rank
 
@@ -120,9 +120,9 @@ class Simulator:
 
     def simulate(self):
         while True:
-            # We need patients and thier records here
-
-            for patient in self.patient_list.patients:
+            if len(self.patients_view.patients_list.patients) == 0:
+                continue
+            for patient in self.patients_view.patients_list.patients:
                 curr_patient_record = patient.current_record
                 if curr_patient_record:
                     # Generate new record
@@ -131,9 +131,9 @@ class Simulator:
                     patient.rank = self.calculate_rank(patient, new_record)
                     new_record.rank = patient.rank
                     # Add Record
-                    self.patient_list.add_record(new_record)
+                    self.patients_view.patients_list.add_record(new_record)
                     # Update Patient
-                    self.patient_list.update_patient(patient)
+                    self.patients_view.patients_list.update_patient(patient)
                 else:
                     # Generate Initial Record
                     initial_record = users.Record(
@@ -150,8 +150,8 @@ class Simulator:
                     patient.rank = self.calculate_rank(patient, initial_record)
                     initial_record.rank = patient.rank
                     # Add Record
-                    self.patient_list.add_record(initial_record)
+                    self.patients_view.patients_list.add_record(initial_record)
                     # Update Patient
-                    self.patient_list.update_patient(patient)
-
+                    self.patients_view.patients_list.update_patient(patient)
+            self.patients_view.refresh()
             time.sleep(10)

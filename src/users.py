@@ -22,7 +22,7 @@ class Record:
 
 
 class Patient:
-    def __init__(self,patient_id,name,age,address,location,arrival_time,complaint,Ctas,rank=0,current_record=None):
+    def __init__(self,patient_id,name,age,address,location,arrival_time,complaint,ctas,rank=0,current_record=None):
         self.patient_id = patient_id
         self.name = name
         self.age = age
@@ -30,9 +30,10 @@ class Patient:
         self.location = location
         self.arrival_time = arrival_time
         self.complaint = complaint
-        self.Ctas=Ctas
+        self.ctas=ctas
         self.rank = rank
         self.current_record : Record = current_record
+
 
 
 
@@ -81,12 +82,19 @@ class PatientList:
         for record in self.records:
             if record.patient_id == patient_id:
                 return record
+            
+    def get_records(self, patient_id):
+        records = []
+        for record in self.records:
+            if record.patient_id == patient_id:
+                records.append(record)
+        return records
 
     def add_patient(self, patient):
         self.patients.append(patient)
         with open(PATIENT_PATH, 'a') as file:
             writer = csv.writer(file)
-            writer.writerow([patient.patient_id,patient.name, patient.age, patient.address,patient.location,patient.arrival_time,patient.complaint, patient.Ctas, patient.rank])
+            writer.writerow([patient.patient_id,patient.name, patient.age, patient.address,patient.location,patient.arrival_time,patient.complaint, patient.ctas, patient.rank])
 
     def add_record(self, record):
         self.records.append(record)
@@ -102,6 +110,6 @@ class PatientList:
         with open(PATIENT_PATH, 'w') as file:
             writer = csv.writer(file)
             for patient in self.patients:
-                writer.writerow([patient.patient_id,patient.name, patient.age, patient.address,patient.location,patient.arrival_time,patient.complaint,patient.Ctas, patient.rank])
+                writer.writerow([patient.patient_id,patient.name, patient.age, patient.address,patient.location,patient.arrival_time,patient.complaint,patient.ctas, patient.rank])
 
     

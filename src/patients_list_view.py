@@ -26,18 +26,9 @@ from flet import (
 from users import PatientList
 from patient_details_view import PatientDetailsView
 
-# class Patient:
-#     def __init__(self,patient_id,name,age,address,location,Ctas,rank=0,latest_record=None):
-#         self.patient_id = patient_id
-#         self.name = name
-#         self.age = age
-#         self.address = address
-#         self.location = location
-#         self.Ctas=Ctas
-#         self.rank = rank
 
-class PatientsList(UserControl):
-    def __init__(self, app, patients_list, *args, **kwargs):
+class PatientsListView(UserControl):
+    def __init__(self, app, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.app = app
         self.patitents_list = app.patients_list.get_patients()
@@ -59,7 +50,7 @@ class PatientsList(UserControl):
                 Row([Icon(name=icons.TIMER, size=30, color=colors.WHITE), Text(value=patient.age, style="headlineMedium")]),
                 Row([Icon(name=icons.SIGNPOST, size=30, color=colors.WHITE), Text(value=patient.address, style="headlineMedium")]),
                 Row([Icon(name=icons.LOCATION_ON, size=30, color=colors.WHITE), Text(value=patient.location, style="headlineMedium")]),
-                Row([Icon(name=icons.FAVORITE, size=30, color=colors.WHITE), Text(value=patient.Ctas, style="headlineMedium")]),
+                Row([Icon(name=icons.FAVORITE, size=30, color=colors.WHITE), Text(value=patient.ctas, style="headlineMedium")]),
                 Row([Icon(name=icons.SPORTS_SCORE, size=30, color=colors.WHITE), Text(value=patient.rank, style="headlineMedium")]),
                     ]),
                     padding=padding.all(10),

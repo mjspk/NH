@@ -1,3 +1,5 @@
+import datetime
+import uuid
 from flet import (
     AlertDialog,
     AppBar,
@@ -25,11 +27,14 @@ from flet import (
 
 from add_patient_view import AddPatientView
 from patients_list_view import PatientsListView
+from users import Patient, PatientList
 
 class PatientsView(UserControl):
     def __init__(self, app, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.app = app
+        self.patients_list = PatientList()
+        self.patients_list_view = PatientsListView(self)
         self.build()
     
     def build(self):
@@ -37,12 +42,8 @@ class PatientsView(UserControl):
              Column([
                 Row(
                     [
-                        Container(
-                            Text(value="Waiting Patients", style="headlineMedium"),
-                            expand=False,
-                        ),
-                        Container(
-                            TextButton(
+                     Text(value="Waiting Patients", style="headlineMedium",text_align="center"),
+                     TextButton(
                                 "Add new Patient",
                                 icon=icons.ADD,
                                 on_click=self.add_patient_dialog,
@@ -50,11 +51,10 @@ class PatientsView(UserControl):
                                     bgcolor=colors.BLUE_400,
                                     shape={"": RoundedRectangleBorder(radius=3)},
                                 ),
-                                
-                            ),
                             
-                        ),
-                    ]
+                            )
+
+                    ],
                 ),
                 Row(
                     [
@@ -72,7 +72,7 @@ class PatientsView(UserControl):
                         )
                     ]
                 ),
-                Row(PatientsListView(self.app)),
+                Row([Container(self.patients_list_view,height=600,width=600)]),
             ],
             expand=True,        
         ),
@@ -92,14 +92,25 @@ class PatientsView(UserControl):
     def add_patient(self, e):
         self.page.dialog.open=False
         self.page.update()
-        patient_name = self.page.dialog.content.controls[0].value
-        patient_age = self.page.dialog.content.controls[1].value
-        patient_address = self.page.dialog.content.controls[2].value
+        name = self.page.dialog.content.controls[0].value
+        age = self.page.dialog.content.controls[1].value
+        address = self.page.dialog.content.controls[2].value
+        location = self.page.dialog.content.controls[3].value
+        complaint = self.page.dialog.content.controls[4].value
+        Ctas = self.page.dialog.content.controls[5].value
+        current_time = datetime.datetime.now()
+
+        p=Patient(str(uuid.uuid4()),name,age,address,location,current_time,complaint,Ctas)
+        self.patients_list.add_patient(p)
+        self.patients_list_view.refresh()
 
 
     def cancel_add_patient(self, e):
         self.page.dialog.open=False
         self.page.update()
+
+
+        
 
 
 

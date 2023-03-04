@@ -56,7 +56,7 @@ class PatientList:
             for row in reader:
                 if len(row) < 9:
                     continue
-                record = Record(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8])
+                record = Record(row[0], row[1], row[2], int(row[3]), int(row[4]), float(row[5]), float(row[6]),int( row[7]), row[8])
                 self.records.append(record)
         
         self.records.sort(key=lambda x: x.date_time, reverse=True)

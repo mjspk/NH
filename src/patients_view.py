@@ -76,7 +76,7 @@ class PatientsView(UserControl):
                         )
                     ]
                 ),
-                Row([Container(self.patients_list_view,height=600,width=600)]),
+                Row([Container(self.patients_list_view,height=600,width=800)]),
             ],
             expand=True,        
         ),
